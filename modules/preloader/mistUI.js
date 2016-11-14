@@ -156,3 +156,18 @@ document.addEventListener('keydown', (e) => {
             { webview.reloadIgnoringCache(); }
     }
 }, false);
+
+
+// Preventing drag and drop on Mist UI. Only allows it on webview.
+var preventDropOnMistUI = function (event) {
+    if (event.target.nodeName !== 'WEBVIEW') {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+};
+
+document.addEventListener('dragover', preventDropOnMistUI, false);
+
+document.addEventListener('drop', preventDropOnMistUI, false);
+
